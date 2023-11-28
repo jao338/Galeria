@@ -41,14 +41,66 @@
         </div>
 
         <div class="container">
-            <h1 class="text-center mT-128 mB-32">Galeria de Imagens</h1>
+            <div class="row">
+                <h1 class="text-center mT-128 mB-32">Galeria de Imagens</h1>
 
-            <form action="/" method="GET" class="d-flex pRL-128">
-            
-                <input type="text" class="form-control" placeholder="Search">
+                <form action="/" method="GET" class="d-flex pRL-128">
+                
+                    <input type="text" class="form-control" placeholder="Search">
+                    <button type="submit" class="btn btn-outline-dark mL-8">Search</button>
 
-                <button type="submit" class="btn btn-outline-dark">Search</button>
-            </form>
+                </form>
+            </div>
+
+            {{--
+                <div class="d-flex pRL-128">
+                    <form class="d-flex" action="/" method="GET">
+                        <span>Filtrar por: </span>
+                        <input type="text" name="filter" id="filter" class="form-control">
+                    </form>
+
+                    <form class="d-flex" action="/" method="GET">
+                        <span>Ordenar por: </span>
+                        <input type="text" name="filter" id="filter" class="form-control">
+                    </form>
+                </div>
+                --}}
+
+                <div class="row d-flex justify-content-center mT-32">
+
+                    <div class="col-md-3 card mR-32">
+                        <div class="d-flex justify-content-center card-header">Cabeçalho</div>
+                        <div class="card-body">Corpo</div>
+                    </div>
+
+                    <div class="col-md-3 card mR-32">
+                        <div class="d-flex justify-content-center card-header">Cabeçalho</div>
+                        <div class="card-body">Corpo</div>
+                    </div>
+
+                    <div class="col-md-3 card mR-32">
+                        <div class="d-flex justify-content-center card-header">Cabeçalho</div>
+                        <div class="card-body">Corpo</div>
+                    </div>
+                    
+                    <div class="col-md-3 card mR-32">
+                        <div class="d-flex justify-content-center card-header">Cabeçalho</div>
+                        <div class="card-body">Corpo</div>
+                    </div>
+
+                    <div class="col-md-3 card mR-32">
+                        <div class="d-flex justify-content-center card-header">Cabeçalho</div>
+                        <div class="card-body">Corpo</div>
+                    </div>
+
+                    <div class="col-md-3 card mR-32">
+                        <div class="d-flex justify-content-center card-header">Cabeçalho</div>
+                        <div class="card-body">Corpo</div>
+                    </div>
+                    
+                </div>
+
+
         </div>
     </body>
 </html>
