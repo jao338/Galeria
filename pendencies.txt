@@ -1,0 +1,3 @@
+X - Criar o model da galeria e estabelecer a relação entre usuario e galeria
+
+X - Criar uma factory e uma seed da galeria
