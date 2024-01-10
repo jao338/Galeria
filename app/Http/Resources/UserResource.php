@@ -14,6 +14,10 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
+
+        // dd(request()->header('token'));
+
         return [
             'id' => (int) $this->id,
             'name' => (string) $this->name,

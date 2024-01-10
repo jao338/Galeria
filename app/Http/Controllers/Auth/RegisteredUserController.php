@@ -3,61 +3,44 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
-use Illuminate\View\View;
+use Exception;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class RegisteredUserController extends Controller
 {
-    /**
-     * Display the registration view.
-     */
 
-    public function index(){
+    private $resource;
+    private $model;
 
-        $users = User::all();
-
-        return UserResource::collection($users);
+    public function __construct(User $user){
+        $this->resource = UserResource::class;
+        $this->model = $user;
     }
 
-    public function create(): View{
-        return view('auth.register');
+    public function index(): JsonResource {
+
+        $users = $this->model->all();
+
+        return $this->resource::collection($users);
     }
 
-    /**
-     * Handle an incoming registration request.
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    // public function store(Request $request): RedirectResponse{
+    public function show($id): JsonResource {
+        $user = $this->model->find($id);
 
-    //     $request->validate([
-    //         'name' => ['required', 'string', 'max:255'],
-    //         'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-    //         'password' => ['required', 'confirmed', Rules\Password::defaults()],
-    //     ]);
+        throw_if(!$user, new Exception('Joao é guei'));
 
-    //     $user = User::create([
-    //         'name' => $request->name,
-    //         'email' => $request->email,
-    //         'password' => Hash::make($request->password),
-    //     ]);
-
-    //     event(new Registered($user));
-
-    //     Auth::login($user);
-
-    //     return redirect(RouteServiceProvider::HOME);
-    // }
-
-    public function store(){
-        return 'Store';
+        return $this->resource($user);
     }
+
+    public function store(UserRequest $request): JsonResource  {
+
+        $createdUser = $this->model->create($request->all());
+
+        return $this->resource($createdUser);
+    }
+
+
 }

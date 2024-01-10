@@ -16,5 +16,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/users', [RegisteredUserController::class, 'index'])->name('users-index');
-Route::get('/users/register', [RegisteredUserController::class, 'store'])->name('users-register');
+
+Route::apiResource('users', RegisteredUserController::class);
