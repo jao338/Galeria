@@ -1,8 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::apiResource('users', RegisteredUserController::class);
+// Route::apiResource('gallery', GalleryController::class);
