@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
@@ -49,7 +50,10 @@ class RegisteredUserController extends Controller
     public function store(UserRequest $request): JsonResource  {
         $createdUser = $this->model->create($request->all());
 
-        return new $this->resource($createdUser);
+        $token = $createdUser->createToken($request->email)->plainTextToken;
+
+        return (new UserResource($createdUser))->additional(['token' => $token]);
+
     }
 
     //  Obrigatoriamente retorna um jsonresource
