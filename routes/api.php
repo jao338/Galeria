@@ -16,9 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/login', [AuthController::class, 'auth']);
+Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
 
-Route::apiResource('/users', RegisteredUserController::class);
+
+Route::middleware(['auth:sanctum'])->group(function () {
+
+    Route::apiResource('/users', RegisteredUserController::class);
+
+});
 
 // Route::apiResource('gallery', GalleryController::class);

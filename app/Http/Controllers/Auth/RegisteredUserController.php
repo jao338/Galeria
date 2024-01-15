@@ -47,14 +47,15 @@ class RegisteredUserController extends Controller
     }
 
     //  Obrigatoriamente retorna um jsonresource
-    public function store(UserRequest $request): JsonResource  {
-        $createdUser = $this->model->create($request->all());
+    // public function store(UserRequest $request): JsonResource  {
+    //     $createdUser = $this->model->create($request->all());
 
-        $token = $createdUser->createToken($request->email)->plainTextToken;
+    //     $token = $createdUser->createToken($request->email)->plainTextToken;
 
-        return (new UserResource($createdUser))->additional(['token' => $token]);
+    //     return (new UserResource($createdUser))->additional(['token' => $token]);
+    //     // return new UserResource($createdUser);
 
-    }
+    // }
 
     //  Obrigatoriamente retorna um jsonresource
     public function update(UserRequest $request): JsonResource  {
