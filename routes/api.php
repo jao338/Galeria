@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,16 +16,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login', [AuthController::class, 'auth']);
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-Route::get('/me', [AuthController::class, 'me'])->middleware('auth:sanctum');
-
+Route::post('login', [AuthController::class, 'auth']);
+Route::post('register', [AuthController::class, 'register']);
+Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::middleware(['auth:sanctum'])->group(function () {
+    //Rota para trazer dados do usuario logado
+    Route::get('me', [AuthController::class, 'me']);
 
-    Route::apiResource('/users', RegisteredUserController::class);
+
+    // Rotas de crud
+    Route::apiResource('users', RegisteredUserController::class)->parameters(['' => 'id']);
+    Route::apiResource('gallery', GalleryController::class);
+
 
 });
 
-// Route::apiResource('gallery', GalleryController::class);
+

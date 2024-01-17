@@ -18,8 +18,8 @@ class UserRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)],
-            'password_confirmation' => [Password::min(8)],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            // 'password_confirmation' => [Password::min(8)],
         ];
-    } //->ignore($this->user()->id)
+    }
 }

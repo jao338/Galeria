@@ -16,16 +16,15 @@ class GalleryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'image' => route('imagem.show', ['id' => $this->id]),
+            'path' => $this->path,
+            // 'image' => route('imagem.show', ['id' => $this->id]),
         ];
     }
 }
 
 /*
-
     return [
             'id' => (int) $this->id,
             'name' => (string) $this->name,
         ];
-
 */

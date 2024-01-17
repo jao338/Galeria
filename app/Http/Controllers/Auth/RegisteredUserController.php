@@ -7,15 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Exception;
-use GuzzleHttp\Psr7\Request;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Contracts\View\View;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class RegisteredUserController extends Controller
 {
@@ -47,22 +39,32 @@ class RegisteredUserController extends Controller
     }
 
     //  Obrigatoriamente retorna um jsonresource
-    // public function store(UserRequest $request): JsonResource  {
-    //     $createdUser = $this->model->create($request->all());
+    public function update(UserRequest $request, $id): JsonResource  {
 
-    //     $token = $createdUser->createToken($request->email)->plainTextToken;
+        $user = $this->model->find($id);
 
-    //     return (new UserResource($createdUser))->additional(['token' => $token]);
-    //     // return new UserResource($createdUser);
+        if (!$user) {
+            // Handle not found
+            return response()->json(['message' => 'User not found'], 404);
+        }
 
-    // }
+        $user->update($request->all());
 
-    //  Obrigatoriamente retorna um jsonresource
-    public function update(UserRequest $request): JsonResource  {
+        return new $this->resource($user);
+    }
 
-        $updateUser = $this->model->update($request->all());
+    public function destroy($id) {
 
-        return $this->resource($updateUser);
+        $user = $this->model->find($id);
+
+        $user->tokens()->delete();
+
+        $user->delete();
+
+        return response()->json([
+            'message' => 'success'
+        ]);
+
     }
 
 }
