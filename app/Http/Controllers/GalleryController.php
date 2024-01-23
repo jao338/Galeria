@@ -22,7 +22,7 @@ class GalleryController extends Controller
 
     public function index()
     {
-        // dd('s');
+        //  dd('s');
         $gallery = $this->model->all();
 
         return $this->resource::collection($gallery);

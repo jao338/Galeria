@@ -32,4 +32,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 });
 
+Route::get('gallery', [GalleryController::class, 'index']);
+
+
 
