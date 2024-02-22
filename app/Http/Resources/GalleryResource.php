@@ -14,9 +14,11 @@ class GalleryResource extends JsonResource
      */
     public function toArray(Request $request): array{
         return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'path' => $this->path,
+            'id_gallery' => $this->gallery_id,
+            'name_gallery' => $this->gallery_name,
+            'path' => $this->gallery_path,
+            'created_at' => $this->gallery_created_at,
+            'user_name' => $this->user_name,
             // 'image' => route('imagem.show', ['id' => $this->id]),
         ];
     }

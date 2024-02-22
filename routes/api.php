@@ -27,8 +27,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     // Rotas de crud
     Route::apiResource('users', RegisteredUserController::class)->parameters(['' => 'id']);
-    Route::apiResource('gallery', GalleryController::class);
-
+    Route::apiResource('gallery', GalleryController::class)->parameters(['' => 'id']);
 
 });
 

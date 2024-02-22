@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class RegisteredUserController extends Controller
@@ -33,7 +34,7 @@ class RegisteredUserController extends Controller
     public function show($id): JsonResource {
         $user = $this->model->find($id);
 
-        // throw_if(!$user, new Exception('Kaio é guei'));
+        throw_if(!$user, new Exception('Algo deu errado'));
 
         return new $this->resource($user);
     }

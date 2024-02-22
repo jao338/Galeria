@@ -1,3 +1,9 @@
-X - Criar o model da galeria e estabelecer a relação entre usuario e galeria
-
 X - Criar uma factory e uma seed da galeria
+
+X - Ajustar as respostas e tratamentos de erros das funções dos controllers
+
+X - Implementar a busca por um registro da galeria, editar um registro e excluir
+
+X - Possibilidade de atualizar a imagem posteriormente, apenas se caso o usuario autenticado for o mesmo que fez o upload
+
+X - Adicionar um campo de tags para a tabela de gallery, possivelmente com o tipo json
