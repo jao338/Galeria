@@ -14,8 +14,7 @@ class GalleryController extends Controller
     private $model;
 
     //  Ao estanciar um objeto é feita a injeção de dependencias da classe UserResource no controller
-    public function __construct(Gallery $gallery)
-    {
+    public function __construct(Gallery $gallery){
         $this->resource = GalleryResource::class;
         $this->model = $gallery;
     }
@@ -25,21 +24,19 @@ class GalleryController extends Controller
 
         return $this->resource::collection($gallery);
     }
-
-
     
     public function show($id): JsonResource {
-        $gallery = Gallery::select('galleries.id as gallery_id', 'galleries.name as gallery_name', 'galleries.path as gallery_path', 'galleries.created_at as gallery_created_at', 'users.name as user_name')
+
+        $gallery = Gallery::select('galleries.*', 'users.*')
                         ->join('users', 'galleries.user_id', '=', 'users.id')
-                        ->where('galleries.id', $id)
+                        ->where('galleries.id', '=', $id)
                         ->first();
-
+        
         throw_if(!$gallery, new Exception('Algo deu errado'));
-
+        
         return new GalleryResource($gallery);
     }
     
-
     public function store(Request $request){
         $dados = $request->all();
         $file = $request->file('image');
@@ -58,6 +55,17 @@ class GalleryController extends Controller
         ]);
     }
 
-    public function destroy(){
+    public function destroy($id){
+
+        $register = Gallery::findOrFail($id);
+
+        if ($register) {
+            $register->delete();
+        }
+
+        return response()->json([
+            "message" => true
+        ]);
+
     }
 }

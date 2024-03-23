@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('galleries', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('path')->nullable();
+            $table->id('id_gallery');
+            $table->string('name_gallery');
+            $table->string('path_gallery')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
